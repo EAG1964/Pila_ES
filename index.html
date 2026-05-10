@@ -13,7 +13,7 @@
         }
         @keyframes flowLeft {
             from { stroke-dashoffset: 0; }
-            to { stroke-dashoffset: 24; }
+            to { stroke-dashoffset: -24; }
         }
         .electron-flow-right {
             stroke-dasharray: 12;
@@ -41,39 +41,38 @@
 
         /* Estilos generales de transición */
         .fade-in {
-            animation: fadeIn 0.5s ease-in;
+            animation: fadeIn 0.5s ease-in forwards;
         }
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
         }
-	.licencia-bloque { 
-    flex-basis: 100%; /* Esto obliga a que ocupe todo el ancho y baje */
-    margin-top: 25px; 
-    background: #f1f5f9; 
-    color: #475569; 
-    font-size: 11px; 
-    text-align: center; 
-    border-radius: 8px; 
-    padding: 12px; 
-    border: 1px solid #e2e8f0;
-    line-height: 1.6;
-    font-family: sans-serif;
-    clear: both; /* Por si acaso hay elementos flotantes */
-}
-.licencia-bloque a { color: #2563eb; text-decoration: none; font-weight: bold; }
-.licencia-bloque a:hover { text-decoration: underline; }
-.badge-container { 
-    margin-bottom: 8px; 
-    display: flex;          /* Usamos flexbox para centrar contenido */
-    justify-content: center; /* Centra horizontalmente */
-    align-items: center;    /* Centra verticalmente */
-}
-
-.badge-container img {
-    display: block;
-    margin: 0 auto;         /* Refuerzo de centrado para la imagen */
-}
+        .licencia-bloque { 
+            flex-basis: 100%; 
+            margin-top: 25px; 
+            background: #f1f5f9; 
+            color: #475569; 
+            font-size: 11px; 
+            text-align: center; 
+            border-radius: 8px; 
+            padding: 12px; 
+            border: 1px solid #e2e8f0;
+            line-height: 1.6;
+            font-family: sans-serif;
+            clear: both; 
+        }
+        .licencia-bloque a { color: #2563eb; text-decoration: none; font-weight: bold; }
+        .licencia-bloque a:hover { text-decoration: underline; }
+        .badge-container { 
+            margin-bottom: 8px; 
+            display: flex;          
+            justify-content: center; 
+            align-items: center;    
+        }
+        .badge-container img {
+            display: block;
+            margin: 0 auto;         
+        }
     </style>
 </head>
 <body class="bg-slate-200 min-h-screen font-sans text-slate-800 p-2 md:p-4 flex justify-center items-start">
@@ -112,7 +111,6 @@
                 <!-- Panel de Pasos -->
                 <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-200 flex flex-col flex-grow">
                     <h2 id="step-title" class="text-lg font-bold text-blue-800 mb-2 border-b border-blue-100 pb-1">Paso 0: Planteamiento Inicial</h2>
-                    <!-- TEXTO ALINEADO A LA IZQUIERDA -->
                     <p id="step-description" class="text-slate-600 flex-grow text-left leading-relaxed mb-4 text-sm">
                         <!-- El texto se actualizará aquí -->
                     </p>
@@ -142,35 +140,45 @@
                 <div class="grid grid-cols-2 gap-2 lg:gap-4 w-full max-w-[800px] mx-auto mt-[-10px] z-10 relative">
                     <!-- Semirreacción Izquierda -->
                     <div id="reaction-left" class="bg-blue-50 p-2 lg:p-3 rounded-lg border border-blue-100 opacity-0 transition-opacity duration-500 flex flex-col justify-center items-center text-center">
-                        <h3 class="font-bold text-blue-800 mb-1 text-xs uppercase tracking-wider">Cubeta Izquierda</h3>
+                        <h3 id="title-left" class="font-bold text-blue-800 mb-1 text-xs uppercase tracking-wider flex items-center justify-center">Cubeta Izquierda</h3>
                         <div id="equation-left" class="text-sm lg:text-base font-mono"></div>
                     </div>
 
                     <!-- Semirreacción Derecha -->
                     <div id="reaction-right" class="bg-blue-50 p-2 lg:p-3 rounded-lg border border-blue-100 opacity-0 transition-opacity duration-500 flex flex-col justify-center items-center text-center">
-                        <h3 class="font-bold text-blue-800 mb-1 text-xs uppercase tracking-wider">Cubeta Derecha</h3>
+                        <h3 id="title-right" class="font-bold text-blue-800 mb-1 text-xs uppercase tracking-wider flex items-center justify-center">Cubeta Derecha</h3>
                         <div id="equation-right" class="text-sm lg:text-base font-mono"></div>
                     </div>
                 </div>
 
                 <!-- Panel de Reacción Global y Potencial -->
-                <div id="global-panel" class="bg-slate-800 text-white p-4 lg:p-5 rounded-xl shadow-inner hidden mt-2">
-                    <h3 class="font-bold text-lg mb-3 text-center text-green-400">Reacción Global y Cálculo de Potencial</h3>
-                    <div class="flex flex-col md:flex-row justify-around items-stretch gap-4 font-mono">
-                        <div class="bg-slate-700 p-3 rounded-lg text-center w-full md:w-1/2 flex flex-col justify-center">
-                            <p class="text-slate-300 text-xs mb-2">Ecuación iónica global (ajustada)</p>
-                            <div id="global-equation" class="font-bold text-yellow-300 text-base lg:text-lg"></div>
+                <div id="global-panel" class="bg-slate-800 text-white p-3 lg:p-4 rounded-xl shadow-inner hidden mt-2 fade-in">
+                    <h3 class="font-bold text-lg mb-2 text-center text-green-400">Análisis Global de la Pila</h3>
+                    
+                    <div class="flex flex-col gap-2 font-mono">
+                        <!-- Paso 5: Ecuación -->
+                        <div id="equation-panel" class="bg-slate-700 py-2 px-3 rounded-lg text-center flex flex-col justify-center border border-slate-600">
+                            <p class="text-slate-200 text-base lg:text-lg font-semibold mb-1 font-sans">Ecuación iónica global (ajustada)</p>
+                            <div id="global-equation" class="font-bold text-yellow-300 text-base lg:text-xl"></div>
                         </div>
-                        <div class="bg-slate-700 p-3 rounded-lg text-center w-full md:w-1/2 flex flex-col justify-center">
-                            <p class="text-slate-300 text-xs mb-2">Fuerza Electromotriz (f.e.m.)</p>
+
+                        <!-- Paso 6: FEM -->
+                        <div id="fem-panel" class="bg-slate-700 py-2 px-3 rounded-lg text-center hidden flex-col justify-center fade-in border border-slate-600">
+                            <p class="text-slate-200 text-base lg:text-lg font-semibold mb-1 font-sans">Fuerza Electromotriz (f.e.m.)</p>
                             <div id="voltage-calculation" class="text-sm lg:text-base"></div>
+                        </div>
+                        
+                        <!-- Paso 7: REPRESENTACIÓN SIMBÓLICA -->
+                        <div id="symbolic-panel" class="bg-slate-700 py-2 px-3 rounded-lg text-center hidden flex-col justify-center fade-in border border-cyan-600">
+                            <p class="text-slate-200 text-base lg:text-lg font-semibold mb-1 font-sans">Representación Simbólica de la Pila</p>
+                            <div id="cell-notation" class="font-bold text-cyan-300 text-sm lg:text-lg overflow-x-auto whitespace-nowrap"></div>
                         </div>
                     </div>
                 </div>
 
             </div>
         </div>
-	<div class="licencia-bloque">
+        <div class="licencia-bloque">
             <div class="badge-container">
                 <img src="https://visitor-badge.laobi.icu/badge?page_id=EAG1964.phychem.lab&left_text=Visitas&left_color=gray&right_color=blue" alt="Visitas">
             </div>
@@ -185,48 +193,81 @@
     <script>
         // --- DATOS QUÍMICOS ---
         const REDOX_PAIRS = [
+            { id: 'Li', ox: 'Li<sup>+</sup>', red: 'Li', e0: -3.04, e: 1, color: '#9CA3AF', type: 'solid' },
+            { id: 'Na', ox: 'Na<sup>+</sup>', red: 'Na', e0: -2.71, e: 1, color: '#D1D5DB', type: 'solid' },
             { id: 'Mg', ox: 'Mg<sup>2+</sup>', red: 'Mg', e0: -2.37, e: 2, color: '#D0D0D0', type: 'solid' },
             { id: 'Al', ox: 'Al<sup>3+</sup>', red: 'Al', e0: -1.66, e: 3, color: '#B0C4DE', type: 'solid' },
+            { id: 'H2O/H2 (base)', ox: 'H<sub>2</sub>O', red: 'H<sub>2</sub>', e0: -0.83, e: 2, color: '#E5E4E2', type: 'gas', electrode: 'Pt', complex: true, gasLabel: 'H₂', needsBase: true,
+              red_reactants: [{c: 2, s: 'H<sub>2</sub>O'}], red_products: [{c: 1, s: 'H<sub>2</sub>'}, {c: 2, s: 'OH<sup>-</sup>'}],
+              ox_reactants: [{c: 1, s: 'H<sub>2</sub>'}, {c: 2, s: 'OH<sup>-</sup>'}], ox_products: [{c: 2, s: 'H<sub>2</sub>O'}]
+            },
             { id: 'Zn', ox: 'Zn<sup>2+</sup>', red: 'Zn', e0: -0.76, e: 2, color: '#A9A9A9', type: 'solid' },
             { id: 'Cr', ox: 'Cr<sup>3+</sup>', red: 'Cr', e0: -0.74, e: 3, color: '#7F8C8D', type: 'solid' },
             { id: 'Fe', ox: 'Fe<sup>2+</sup>', red: 'Fe', e0: -0.44, e: 2, color: '#778899', type: 'solid' },
             { id: 'Cd', ox: 'Cd<sup>2+</sup>', red: 'Cd', e0: -0.40, e: 2, color: '#B0B0B0', type: 'solid' },
+            { id: 'Co', ox: 'Co<sup>2+</sup>', red: 'Co', e0: -0.28, e: 2, color: '#64748b', type: 'solid' },
             { id: 'Ni', ox: 'Ni<sup>2+</sup>', red: 'Ni', e0: -0.25, e: 2, color: '#8F9779', type: 'solid' },
             { id: 'Sn', ox: 'Sn<sup>2+</sup>', red: 'Sn', e0: -0.14, e: 2, color: '#708090', type: 'solid' },
             { id: 'Pb', ox: 'Pb<sup>2+</sup>', red: 'Pb', e0: -0.13, e: 2, color: '#696969', type: 'solid' },
-            { id: 'H2', ox: 'H<sup>+</sup>', red: 'H<sub>2</sub>', e0: 0.00, e: 2, color: '#E5E4E2', type: 'gas', electrode: 'Pt', complex: true, gasLabel: 'H₂',
+            { id: 'H2', ox: 'H<sup>+</sup>', red: 'H<sub>2</sub>', e0: 0.00, e: 2, color: '#E5E4E2', type: 'gas', electrode: 'Pt', complex: true, gasLabel: 'H₂', needsAcid: true,
               red_reactants: [{c: 2, s: 'H<sup>+</sup>'}], red_products: [{c: 1, s: 'H<sub>2</sub>'}],
               ox_reactants: [{c: 1, s: 'H<sub>2</sub>'}], ox_products: [{c: 2, s: 'H<sup>+</sup>'}]
             },
-            { id: 'Cl2', ox: 'Cl<sub>2</sub>', red: 'Cl<sup>-</sup>', e0: 1.36, e: 2, color: '#9ACD32', type: 'gas', electrode: 'Pt', complex: true, gasLabel: 'Cl₂',
-              red_reactants: [{c: 1, s: 'Cl<sub>2</sub>'}], red_products: [{c: 2, s: 'Cl<sup>-</sup>'}],
-              ox_reactants: [{c: 2, s: 'Cl<sup>-</sup>'}], ox_products: [{c: 1, s: 'Cl<sub>2</sub>'}]
+            { id: 'Sn4+/Sn2+', ox: 'Sn<sup>4+</sup>', red: 'Sn<sup>2+</sup>', e0: 0.15, e: 2, color: '#B0C4DE', type: 'aqueous', electrode: 'Pt' },
+            { id: 'Cu', ox: 'Cu<sup>2+</sup>', red: 'Cu', e0: 0.34, e: 2, color: '#B87333', type: 'solid' },
+            { id: 'O2/OH- (base)', ox: 'O<sub>2</sub>', red: 'OH<sup>-</sup>', e0: 0.40, e: 4, color: '#E0F7FA', type: 'gas', electrode: 'Pt', complex: true, gasLabel: 'O₂', needsBase: true,
+              red_reactants: [{c: 1, s: 'O<sub>2</sub>'}, {c: 2, s: 'H<sub>2</sub>O'}], red_products: [{c: 4, s: 'OH<sup>-</sup>'}],
+              ox_reactants: [{c: 4, s: 'OH<sup>-</sup>'}], ox_products: [{c: 1, s: 'O<sub>2</sub>'}, {c: 2, s: 'H<sub>2</sub>O'}]
             },
-            { id: 'O2', ox: 'O<sub>2</sub>', red: 'H<sub>2</sub>O', e0: 1.23, e: 4, color: '#E0F7FA', type: 'gas', electrode: 'Pt', complex: true, gasLabel: 'O₂',
-              red_reactants: [{c: 1, s: 'O<sub>2</sub>'}, {c: 4, s: 'H<sup>+</sup>'}],
-              red_products: [{c: 2, s: 'H<sub>2</sub>O'}],
-              ox_reactants: [{c: 2, s: 'H<sub>2</sub>O'}],
-              ox_products: [{c: 1, s: 'O<sub>2</sub>'}, {c: 4, s: 'H<sup>+</sup>'}]
+            { id: 'I2', ox: 'I<sub>2</sub>', red: 'I<sup>-</sup>', e0: 0.54, e: 2, color: '#D2691E', type: 'aqueous', electrode: 'Pt', complex: true,
+              red_reactants: [{c: 1, s: 'I<sub>2</sub>'}], red_products: [{c: 2, s: 'I<sup>-</sup>'}],
+              ox_reactants: [{c: 2, s: 'I<sup>-</sup>'}], ox_products: [{c: 1, s: 'I<sub>2</sub>'}]
+            },
+            { id: 'Fe3+/Fe2+', ox: 'Fe<sup>3+</sup>', red: 'Fe<sup>2+</sup>', e0: 0.77, e: 1, color: '#F4A460', type: 'aqueous', electrode: 'Pt' },
+            { id: 'Ag', ox: 'Ag<sup>+</sup>', red: 'Ag', e0: 0.80, e: 1, color: '#C0C0C0', type: 'solid' },
+            { id: 'NO3-/NO', ox: 'NO<sub>3</sub><sup>-</sup>', red: 'NO', e0: 0.96, e: 3, color: '#E6E6FA', type: 'gas', electrode: 'Pt', complex: true, gasLabel: 'NO', needsAcid: true,
+              red_reactants: [{c: 1, s: 'NO<sub>3</sub><sup>-</sup>'}, {c: 4, s: 'H<sup>+</sup>'}],
+              red_products: [{c: 1, s: 'NO'}, {c: 2, s: 'H<sub>2</sub>O'}],
+              ox_reactants: [{c: 1, s: 'NO'}, {c: 2, s: 'H<sub>2</sub>O'}],
+              ox_products: [{c: 1, s: 'NO<sub>3</sub><sup>-</sup>'}, {c: 4, s: 'H<sup>+</sup>'}]
             },
             { id: 'Br2', ox: 'Br<sub>2</sub>', red: 'Br<sup>-</sup>', e0: 1.07, e: 2, color: '#B22222', type: 'aqueous', electrode: 'Pt', complex: true,
               red_reactants: [{c: 1, s: 'Br<sub>2</sub>'}], red_products: [{c: 2, s: 'Br<sup>-</sup>'}],
               ox_reactants: [{c: 2, s: 'Br<sup>-</sup>'}], ox_products: [{c: 1, s: 'Br<sub>2</sub>'}]
             },
-            { id: 'Cu', ox: 'Cu<sup>2+</sup>', red: 'Cu', e0: 0.34, e: 2, color: '#B87333', type: 'solid' },
-            { id: 'Fe3+/Fe2+', ox: 'Fe<sup>3+</sup>', red: 'Fe<sup>2+</sup>', e0: 0.77, e: 1, color: '#F4A460', type: 'aqueous', electrode: 'Pt' },
-            { id: 'Ag', ox: 'Ag<sup>+</sup>', red: 'Ag', e0: 0.80, e: 1, color: '#C0C0C0', type: 'solid' },
-            { id: 'Au', ox: 'Au<sup>3+</sup>', red: 'Au', e0: 1.50, e: 3, color: '#FFD700', type: 'solid' },
-            { id: 'Cr2O7/Cr3+', ox: 'Cr<sub>2</sub>O<sub>7</sub><sup>2-</sup>', red: 'Cr<sup>3+</sup>', e0: 1.33, e: 6, color: '#FF8C00', type: 'aqueous', electrode: 'Pt', complex: true,
+            { id: 'Pt', ox: 'Pt<sup>2+</sup>', red: 'Pt', e0: 1.18, e: 2, color: '#E5E4E2', type: 'solid' },
+            { id: 'O2', ox: 'O<sub>2</sub>', red: 'H<sub>2</sub>O', e0: 1.23, e: 4, color: '#E0F7FA', type: 'gas', electrode: 'Pt', complex: true, gasLabel: 'O₂', needsAcid: true,
+              red_reactants: [{c: 1, s: 'O<sub>2</sub>'}, {c: 4, s: 'H<sup>+</sup>'}],
+              red_products: [{c: 2, s: 'H<sub>2</sub>O'}],
+              ox_reactants: [{c: 2, s: 'H<sub>2</sub>O'}],
+              ox_products: [{c: 1, s: 'O<sub>2</sub>'}, {c: 4, s: 'H<sup>+</sup>'}]
+            },
+            { id: 'Cr2O7/Cr3+', ox: 'Cr<sub>2</sub>O<sub>7</sub><sup>2-</sup>', red: 'Cr<sup>3+</sup>', e0: 1.33, e: 6, color: '#FF8C00', type: 'aqueous', electrode: 'Pt', complex: true, needsAcid: true,
               red_reactants: [{c: 1, s: 'Cr<sub>2</sub>O<sub>7</sub><sup>2-</sup>'}, {c: 14, s: 'H<sup>+</sup>'}],
               red_products: [{c: 2, s: 'Cr<sup>3+</sup>'}, {c: 7, s: 'H<sub>2</sub>O'}],
               ox_reactants: [{c: 2, s: 'Cr<sup>3+</sup>'}, {c: 7, s: 'H<sub>2</sub>O'}],
               ox_products: [{c: 1, s: 'Cr<sub>2</sub>O<sub>7</sub><sup>2-</sup>'}, {c: 14, s: 'H<sup>+</sup>'}]
             },
-            { id: 'MnO4-/Mn2+', ox: 'MnO<sub>4</sub><sup>-</sup>', red: 'Mn<sup>2+</sup>', e0: 1.51, e: 5, color: '#8A2BE2', type: 'aqueous', electrode: 'Pt', complex: true,
+            { id: 'Cl2', ox: 'Cl<sub>2</sub>', red: 'Cl<sup>-</sup>', e0: 1.36, e: 2, color: '#9ACD32', type: 'gas', electrode: 'Pt', complex: true, gasLabel: 'Cl₂',
+              red_reactants: [{c: 1, s: 'Cl<sub>2</sub>'}], red_products: [{c: 2, s: 'Cl<sup>-</sup>'}],
+              ox_reactants: [{c: 2, s: 'Cl<sup>-</sup>'}], ox_products: [{c: 1, s: 'Cl<sub>2</sub>'}]
+            },
+            { id: 'MnO4-/Mn2+', ox: 'MnO<sub>4</sub><sup>-</sup>', red: 'Mn<sup>2+</sup>', e0: 1.51, e: 5, color: '#8A2BE2', type: 'aqueous', electrode: 'Pt', complex: true, needsAcid: true,
               red_reactants: [{c: 1, s: 'MnO<sub>4</sub><sup>-</sup>'}, {c: 8, s: 'H<sup>+</sup>'}],
               red_products: [{c: 1, s: 'Mn<sup>2+</sup>'}, {c: 4, s: 'H<sub>2</sub>O'}],
               ox_reactants: [{c: 1, s: 'Mn<sup>2+</sup>'}, {c: 4, s: 'H<sub>2</sub>O'}],
               ox_products: [{c: 1, s: 'MnO<sub>4</sub><sup>-</sup>'}, {c: 8, s: 'H<sup>+</sup>'}]
+            },
+            { id: 'Ce4+/Ce3+', ox: 'Ce<sup>4+</sup>', red: 'Ce<sup>3+</sup>', e0: 1.61, e: 1, color: '#F0E68C', type: 'aqueous', electrode: 'Pt' },
+            { id: 'H2O2/H2O', ox: 'H<sub>2</sub>O<sub>2</sub>', red: 'H<sub>2</sub>O', e0: 1.78, e: 2, color: '#F0FFFF', type: 'aqueous', electrode: 'Pt', complex: true, needsAcid: true,
+              red_reactants: [{c: 1, s: 'H<sub>2</sub>O<sub>2</sub>'}, {c: 2, s: 'H<sup>+</sup>'}],
+              red_products: [{c: 2, s: 'H<sub>2</sub>O'}],
+              ox_reactants: [{c: 2, s: 'H<sub>2</sub>O'}],
+              ox_products: [{c: 1, s: 'H<sub>2</sub>O<sub>2</sub>'}, {c: 2, s: 'H<sup>+</sup>'}]
+            },
+            { id: 'F2', ox: 'F<sub>2</sub>', red: 'F<sup>-</sup>', e0: 2.87, e: 2, color: '#FFFACD', type: 'gas', electrode: 'Pt', complex: true, gasLabel: 'F₂',
+              red_reactants: [{c: 1, s: 'F<sub>2</sub>'}], red_products: [{c: 2, s: 'F<sup>-</sup>'}],
+              ox_reactants: [{c: 2, s: 'F<sup>-</sup>'}], ox_products: [{c: 1, s: 'F<sub>2</sub>'}]
             }
         ];
 
@@ -253,19 +294,76 @@
             { name: 'NH₄NO₃', cation: 'NH₄⁺', anion: 'NO₃⁻' }
         ];
 
+        // Función Helper para generar la Notación Simbólica
+        function getCellNotation(el, isAnode) {
+            const pt = 'Pt(s)';
+            const aq = '(aq, 1 M)';
+            const g = '(g, 1 atm)';
+            const s = '(s)';
+            const l = '(l)';
+
+            if (el.type === 'solid') {
+                if (isAnode) return `${el.red}${s} | ${el.ox}${aq}`;
+                else return `${el.ox}${aq} | ${el.red}${s}`;
+            }
+            
+            if (el.id === 'H2') {
+                if (isAnode) return `${pt} | ${el.red}${g} | ${el.ox}${aq}`;
+                else return `${el.ox}${aq} | ${el.red}${g} | ${pt}`;
+            }
+            if (el.id === 'Cl2' || el.id === 'F2') {
+                if (isAnode) return `${pt} | ${el.ox}${g} | ${el.red}${aq}`;
+                else return `${el.red}${aq} | ${el.ox}${g} | ${pt}`;
+            }
+            if (el.id === 'H2O/H2 (base)') {
+                if (isAnode) return `${pt} | ${el.red}${g} | OH<sup>-</sup>${aq}`;
+                else return `OH<sup>-</sup>${aq} | ${el.red}${g} | ${pt}`;
+            }
+            if (el.id === 'O2/OH- (base)') {
+                if (isAnode) return `${pt} | ${el.ox}${g} | OH<sup>-</sup>${aq}`;
+                else return `OH<sup>-</sup>${aq} | ${el.ox}${g} | ${pt}`;
+            }
+            if (el.id === 'O2') {
+                if (isAnode) return `${pt} | ${el.ox}${g} | H<sup>+</sup>${aq}, ${el.red}${l}`;
+                else return `H<sup>+</sup>${aq}, ${el.red}${l} | ${el.ox}${g} | ${pt}`;
+            }
+            if (['Br2', 'I2', 'Fe3+/Fe2+', 'Sn4+/Sn2+', 'Ce4+/Ce3+'].includes(el.id)) {
+                if (isAnode) return `${pt} | ${el.red}${aq}, ${el.ox}${aq}`;
+                else return `${el.ox}${aq}, ${el.red}${aq} | ${pt}`;
+            }
+            if (el.id === 'Cr2O7/Cr3+') {
+                if (isAnode) return `${pt} | ${el.red}${aq}, ${el.ox}${aq}, H<sup>+</sup>${aq}`;
+                else return `${el.ox}${aq}, H<sup>+</sup>${aq}, ${el.red}${aq} | ${pt}`;
+            }
+            if (el.id === 'MnO4-/Mn2+') {
+                if (isAnode) return `${pt} | ${el.red}${aq}, ${el.ox}${aq}, H<sup>+</sup>${aq}`;
+                else return `${el.ox}${aq}, H<sup>+</sup>${aq}, ${el.red}${aq} | ${pt}`;
+            }
+            if (el.id === 'NO3-/NO') {
+                if (isAnode) return `${pt} | ${el.red}${g} | ${el.ox}${aq}, H<sup>+</sup>${aq}`;
+                else return `${el.ox}${aq}, H<sup>+</sup>${aq} | ${el.red}${g} | ${pt}`;
+            }
+            if (el.id === 'H2O2/H2O') {
+                if (isAnode) return `${pt} | ${el.red}${l} | ${el.ox}${aq}, H<sup>+</sup>${aq}`;
+                else return `${el.ox}${aq}, H<sup>+</sup>${aq} | ${el.red}${l} | ${pt}`;
+            }
+            return '';
+        }
+
         // Estado Global
         let currentCell = null;
         let step = 0;
-        const MAX_STEPS = 6;
+        const MAX_STEPS = 7;
 
         const STEPS_INFO = [
             { title: "Paso 0: Planteamiento Inicial", btnText: "Paso 1: Identificación de Ánodo y Cátodo", desc: "Observa los potenciales de reducción. El electrodo con menor potencial de reducción tenderá a oxidarse (Ánodo) y el de mayor potencial tenderá a reducirse (Cátodo)." },
             { title: "Paso 1: Identificación de Ánodo y Cátodo", btnText: "Paso 2: Circuito Externo (Electrones)", desc: "El Ánodo (-) es donde ocurre la oxidación (menor E&deg;). El Cátodo (+) es donde ocurre la reducción (mayor E&deg;)." },
             { title: "Paso 2: Circuito Externo (Electrones)", btnText: "Paso 3: Puente Salino", desc: "Los electrones (e⁻) viajan espontáneamente desde el ánodo (polo negativo) hacia el cátodo (polo positivo) a través del cable externo." },
-            { title: "Paso 3: Puente Salino", btnText: "Paso 4: Semirreacciones", desc: "(Equilibrio Iónico) Para mantener la neutralidad eléctrica, los aniones (NO₃⁻) viajan hacia el ánodo y los cationes (K⁺) hacia el cátodo." },
+            { title: "Paso 3: Puente Salino", btnText: "Paso 4: Semirreacciones", desc: "(Equilibrio Iónico) Para mantener la neutralidad eléctrica, los aniones viajan hacia el ánodo y los cationes hacia el cátodo." },
             { title: "Paso 4: Semirreacciones", btnText: "Paso 5: Ajuste de Reacción Global", desc: "Se plantean las semirreacciones de oxidación (ánodo) y reducción (cátodo). Nota cómo la reacción del ánodo se invierte respecto a la tabla." },
             { title: "Paso 5: Ajuste de Reacción Global", btnText: "Paso 6: Cálculo de la F.E.M. de la pila", desc: "Multiplicamos las semirreacciones para igualar el número de electrones intercambiados. Si hay H⁺ o H₂O en ambos lados, se simplifican." },
-            { title: "Paso 6: Cálculo de la F.E.M. de la pila", btnText: "Completado", desc: "Calculamos el potencial de la celda mediante: E&deg;<sub>pila</sub> = E&deg;(cátodo) - E&deg;(ánodo). ¡Debe ser positivo para ser espontánea!" }
+            { title: "Paso 6: Cálculo de la F.E.M. de la pila", btnText: "Paso 7: Representación Simbólica", desc: "Calculamos el potencial de la celda mediante: E&deg;<sub>pila</sub> = E&deg;(cátodo) - E&deg;(ánodo). ¡Debe ser positivo para ser espontánea!" },
+            { title: "Paso 7: Representación Simbólica", btnText: "Completado", desc: "La notación de la pila resume la configuración. El ánodo (oxidación) va a la izquierda y el cátodo (reducción) a la derecha, separados por '||' (puente salino). Las fases distintas se separan con '|' y las de la misma fase con ','." }
         ];
 
         // Inicialización
@@ -364,7 +462,31 @@
             const eqRight = document.getElementById('equation-right');
             const globalPanel = document.getElementById('global-panel');
             const globalEq = document.getElementById('global-equation');
+            const femPanel = document.getElementById('fem-panel');
             const voltCalc = document.getElementById('voltage-calculation');
+            const symbolicPanel = document.getElementById('symbolic-panel');
+            const cellNotation = document.getElementById('cell-notation');
+            const titleLeft = document.getElementById('title-left');
+            const titleRight = document.getElementById('title-right');
+
+            // --- Lógica del Tooltip de Aviso (Metales Alcalinos) ---
+            const getWarningIcon = (metalId) => `
+                <span class="group relative inline-flex items-center cursor-help ml-1 text-amber-500 hover:text-amber-600 transition-colors">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    <span class="hidden group-hover:block absolute bottom-full left-1/2 -translate-x-1/2 mb-1 w-56 p-2 bg-slate-800 text-white text-xs rounded shadow-lg z-[100] normal-case tracking-normal font-normal text-left leading-relaxed">
+                        <strong class="text-amber-400 block mb-1">¡Aviso Teórico!</strong>
+                        El metal <strong>${metalId}</strong> reaccionaría explosivamente con el agua. En un laboratorio real, esta pila requiere electrolitos no acuosos.
+                        <svg class="absolute text-slate-800 h-2 w-full left-0 top-full" x="0px" y="0px" viewBox="0 0 255 255" xml:space="preserve"><polygon class="fill-current" points="0,0 127.5,127.5 255,0"/></svg>
+                    </span>
+                </span>
+            `;
+
+            const hasWarningLeft = ['Li', 'Na'].includes(currentCell.left.id);
+            const hasWarningRight = ['Li', 'Na'].includes(currentCell.right.id);
+
+            titleLeft.innerHTML = `Cubeta Izquierda ${hasWarningLeft ? getWarningIcon(currentCell.left.id) : ''}`;
+            titleRight.innerHTML = `Cubeta Derecha ${hasWarningRight ? getWarningIcon(currentCell.right.id) : ''}`;
+            // -------------------------------------------------------
 
             if (step >= 4) {
                 leftPanel.style.opacity = '1';
@@ -445,14 +567,35 @@
             }
 
             if (step >= 6) {
+                femPanel.classList.remove('hidden');
+                femPanel.classList.add('flex');
+                
                 const fmt = (v) => v > 0 ? `+${v}` : v;
                 voltCalc.innerHTML = `
-                    <div class="mb-1 text-slate-400">E&deg;<sub>pila</sub> = E&deg;(cátodo) - E&deg;(ánodo)</div>
-                    <div class="mb-1">E&deg;<sub>pila</sub> = (${fmt(currentCell.cathode.e0)}) - (${fmt(currentCell.anode.e0)})</div>
-                    <div class="text-xl text-green-400 font-bold mt-1">E&deg;<sub>pila</sub> = +${currentCell.eCell} V</div>
+                    <div class="flex flex-wrap justify-center items-center gap-2 lg:gap-4 text-base lg:text-xl text-slate-200 mt-2">
+                        <span>E&deg;<sub>pila</sub> = E&deg;(cátodo) &minus; E&deg;(ánodo)</span>
+                        <span class="text-yellow-400 font-bold">&rarr;</span>
+                        <span>E&deg;<sub>pila</sub> = (${fmt(currentCell.cathode.e0)}) &minus; (${fmt(currentCell.anode.e0)})</span>
+                        <span class="text-yellow-400 font-bold">=</span>
+                        <span class="text-2xl lg:text-3xl text-green-400 font-bold">+${currentCell.eCell} V</span>
+                    </div>
                 `;
             } else {
-                voltCalc.innerHTML = `<span class="text-slate-400 italic">Haz clic en Siguiente para calcular...</span>`;
+                femPanel.classList.add('hidden');
+                femPanel.classList.remove('flex');
+            }
+
+            if (step >= 7) {
+                symbolicPanel.classList.remove('hidden');
+                symbolicPanel.classList.add('flex');
+                
+                const anodeNotation = getCellNotation(currentCell.anode, true);
+                const cathodeNotation = getCellNotation(currentCell.cathode, false);
+                
+                cellNotation.innerHTML = `${anodeNotation} <span class="text-white px-2">||</span> ${cathodeNotation}`;
+            } else {
+                symbolicPanel.classList.add('hidden');
+                symbolicPanel.classList.remove('flex');
             }
         }
 
@@ -470,23 +613,48 @@
             const renderSolutionText = (element, cx) => {
                 const fmtIon = (ion) => ion.replace(/<sup>/g, '<tspan dy="-10" font-size="14">').replace(/<\/sup>/g, '</tspan><tspan dy="10">').replace(/<sub>/g, '<tspan dy="10" font-size="14">').replace(/<\/sub>/g, '</tspan><tspan dy="-10">');
 
+                let html = '';
                 if (element.type === 'aqueous') {
                     // Iones separados a la izquierda y derecha del electrodo de Pt
-                    return `
+                    html += `
                         <text x="${cx - 45}" y="280" text-anchor="middle" font-size="18" font-weight="bold" fill="#0f172a">${fmtIon(element.ox)}</text>
                         <text x="${cx + 45}" y="280" text-anchor="middle" font-size="18" font-weight="bold" fill="#0f172a">${fmtIon(element.red)}</text>
                     `;
                 } else if (element.type === 'gas') {
                     // Identificamos cuál de las dos especies es el ion (tiene <sup>) para dibujarlo en el líquido
                     const ion = element.ox.includes('<sup') ? element.ox : element.red;
-                    return `
+                    html += `
                         <text x="${cx}" y="280" text-anchor="middle" font-size="20" font-weight="bold" fill="#0f172a">${fmtIon(ion)}</text>
                     `;
                 } else {
-                    return `
+                    html += `
                         <text x="${cx}" y="280" text-anchor="middle" font-size="20" font-weight="bold" fill="#0f172a">${fmtIon(element.ox)}</text>
                     `;
                 }
+
+                if (element.needsAcid) {
+                    const hColor = '#e11d48'; // Color rojo/rosado para diferenciarlos
+                    html += `
+                        <!-- Iones H+ del medio ácido -->
+                        <text x="${cx - 35}" y="235" text-anchor="middle" font-size="13" font-weight="bold" fill="${hColor}">H<tspan dy="-6" font-size="10">+</tspan></text>
+                        <text x="${cx + 40}" y="245" text-anchor="middle" font-size="13" font-weight="bold" fill="${hColor}">H<tspan dy="-6" font-size="10">+</tspan></text>
+                        <text x="${cx - 20}" y="310" text-anchor="middle" font-size="13" font-weight="bold" fill="${hColor}">H<tspan dy="-6" font-size="10">+</tspan></text>
+                        <text x="${cx + 25}" y="315" text-anchor="middle" font-size="13" font-weight="bold" fill="${hColor}">H<tspan dy="-6" font-size="10">+</tspan></text>
+                    `;
+                }
+
+                if (element.needsBase) {
+                    const ohColor = '#7e22ce'; // Color púrpura para OH-
+                    html += `
+                        <!-- Iones OH- del medio básico -->
+                        <text x="${cx - 35}" y="235" text-anchor="middle" font-size="13" font-weight="bold" fill="${ohColor}">OH<tspan dy="-6" font-size="10">-</tspan></text>
+                        <text x="${cx + 40}" y="245" text-anchor="middle" font-size="13" font-weight="bold" fill="${ohColor}">OH<tspan dy="-6" font-size="10">-</tspan></text>
+                        <text x="${cx - 20}" y="310" text-anchor="middle" font-size="13" font-weight="bold" fill="${ohColor}">OH<tspan dy="-6" font-size="10">-</tspan></text>
+                        <text x="${cx + 25}" y="315" text-anchor="middle" font-size="13" font-weight="bold" fill="${ohColor}">OH<tspan dy="-6" font-size="10">-</tspan></text>
+                    `;
+                }
+
+                return html;
             };
 
             const getLiquidColor = (element) => element.type === 'aqueous' ? element.color : '#bae6fd';
@@ -555,7 +723,7 @@
                 } else {
                     return `
                         <rect x="${cx-25}" y="120" width="50" height="130" fill="${element.color}" stroke="#334155" stroke-width="2" rx="4" />
-                        <text x="${cx}" y="150" text-anchor="middle" font-size="18" font-weight="bold" fill="${element.color === '#778899' || element.color === '#696969' ? 'white' : 'black'}">${element.id}</text>
+                        <text x="${cx}" y="150" text-anchor="middle" font-size="18" font-weight="bold" fill="${element.color === '#778899' || element.color === '#696969' || element.color === '#64748b' ? 'white' : 'black'}">${element.id}</text>
                     `;
                 }
             };
@@ -597,7 +765,7 @@
                     <!-- Tubo principal -->
                     <path d="M 280 200 L 280 140 A 50 50 0 0 1 330 90 L 470 90 A 50 50 0 0 1 520 140 L 520 200" fill="none" stroke="#f1f5f9" stroke-width="36" opacity="0.9"/>
                     <path d="M 280 200 L 280 140 A 50 50 0 0 1 330 90 L 470 90 A 50 50 0 0 1 520 140 L 520 200" fill="none" stroke="#cbd5e1" stroke-width="40" stroke-linecap="round" opacity="0.5"/>
-                    <text x="400" y="135" text-anchor="middle" font-size="14" font-weight="bold" fill="#475569">Puente Salino (${currentCell.saltBridge.name})</text>
+                    <text x="400" y="135" text-anchor="middle" font-size="18" font-weight="bold" fill="#475569">Puente Salino (${currentCell.saltBridge.name})</text>
 
                     <!-- Animación Iones (Paso 3+) -->
                     ${step >= 3 ? `
